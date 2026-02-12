@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DONGCO - Built Different</title>
+    <title>DONGCO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Work+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Work+Sans:wght@400;600;800&family=Archivo+Black&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF006E;
+            --secondary: #8338EC;
+            --accent: #FB5607;
+            --dark: #0A0A0A;
+            --light: #FFBE0B;
         }
 
         body {
@@ -22,11 +30,21 @@
             height: 100vh;
         }
 
+        /* Video Container */
         .video-container {
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100vh;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            z-index: 10000;
+            transition: opacity 1s ease-out;
+        }
+
+        .video-container.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .scene {
@@ -77,10 +95,6 @@
             background: linear-gradient(135deg, #1a0000 0%, #000 50%, #1a0000 100%);
         }
 
-        #scene7 {
-            background: #000;
-        }
-
         .headline {
             font-family: 'Anton', sans-serif;
             font-size: clamp(3rem, 8vw, 7rem);
@@ -116,54 +130,6 @@
             text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
         }
 
-        .logo-scene {
-            position: relative;
-        }
-
-        .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(5rem, 12vw, 10rem);
-            letter-spacing: 0.1em;
-            color: #fff;
-            text-shadow: 
-                0 0 40px rgba(255, 51, 51, 0.8),
-                0 0 80px rgba(255, 51, 51, 0.5),
-                0 0 120px rgba(255, 51, 51, 0.3);
-            transform: scale(0.8);
-            opacity: 0;
-        }
-
-        .active .logo {
-            animation: logoAppear 1.5s forwards;
-        }
-
-        .tagline {
-            font-family: 'Work Sans', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-top: 2rem;
-            opacity: 0;
-        }
-
-        .active .tagline {
-            animation: fadeIn 1s 1s forwards;
-        }
-
-        .year {
-            font-family: 'Anton', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            color: #666;
-            margin-top: 1rem;
-            opacity: 0;
-        }
-
-        .active .year {
-            animation: fadeIn 1s 1.2s forwards;
-        }
-
-        /* Story scene specific */
         .story-text {
             font-size: clamp(1rem, 2vw, 1.8rem);
             font-weight: 600;
@@ -176,36 +142,328 @@
             color: #ff6666;
         }
 
-        /* CTA Scene */
-        .cta-headline {
+        /* Main Landing Page Styles */
+        .main-page {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark);
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-page.show {
+            opacity: 1;
+        }
+
+        /* Animated gradient background */
+        .main-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, var(--accent) 0%, transparent 50%);
+            opacity: 0.15;
+            animation: pulse 8s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            100% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        /* Noise texture overlay */
+        .main-page::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .logo {
             font-family: 'Anton', sans-serif;
-            font-size: clamp(4rem, 10vw, 9rem);
+            font-size: clamp(4rem, 15vw, 12rem);
+            letter-spacing: -0.02em;
             line-height: 0.9;
             margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent), var(--light));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 6s ease infinite, glitch 4s infinite;
+            text-shadow: 
+                3px 3px 0 rgba(255, 0, 110, 0.3),
+                -3px -3px 0 rgba(131, 56, 236, 0.3);
+            transform-style: preserve-3d;
         }
 
-        .website {
-            font-family: 'Work Sans', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 800;
-            color: #ff3333;
-            text-decoration: none;
-            padding: 1.5rem 3rem;
-            border: 3px solid #ff3333;
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% {
+                transform: translate(0);
+            }
+            92% {
+                transform: translate(-2px, 2px) skew(0.5deg);
+            }
+            94% {
+                transform: translate(2px, -2px) skew(-0.5deg);
+            }
+            96% {
+                transform: translate(-2px, -2px) skew(0.3deg);
+            }
+        }
+
+        .tagline {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 2rem);
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+        }
+
+        .highlight {
+            color: var(--accent);
             display: inline-block;
-            margin-top: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Decorative elements */
+        .circles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            border-color: var(--primary);
+        }
+
+        .circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -5s;
+            border-color: var(--secondary);
+        }
+
+        .circle:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: 50%;
+            animation-delay: -10s;
+            border-color: var(--accent);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .social-links {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
             transition: all 0.3s ease;
-            opacity: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .active .website {
-            animation: fadeIn 1s 1s forwards;
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--light));
+            transition: left 0.3s ease;
+            z-index: -1;
         }
 
-        .website:hover {
-            background: #ff3333;
-            color: #000;
-            box-shadow: 0 0 40px rgba(255, 51, 51, 0.6);
+        .social-link:hover::before {
+            left: 0;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 0, 110, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Animations */
@@ -228,20 +486,6 @@
             }
         }
 
-        @keyframes logoAppear {
-            0% {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
         /* Grain texture overlay */
         .grain {
             position: fixed;
@@ -251,45 +495,58 @@
             height: 100%;
             pointer-events: none;
             opacity: 0.05;
-            z-index: 1000;
+            z-index: 10001;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Replay button */
-        .replay-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: rgba(255, 51, 51, 0.1);
-            border: 2px solid #ff3333;
-            color: #fff;
-            padding: 1rem 2rem;
-            font-family: 'Work Sans', sans-serif;
-            font-weight: 800;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2000;
-            opacity: 0;
-        }
+        @media (max-width: 768px) {
+            .logo {
+                margin-bottom: 1.5rem;
+            }
+            
+            .tagline {
+                margin-bottom: 0.75rem;
+            }
 
-        .replay-btn.show {
-            animation: fadeIn 0.5s forwards;
-        }
+            .social-links {
+                margin-top: 2rem;
+            }
 
-        .replay-btn:hover {
-            background: #ff3333;
-            color: #000;
-            transform: scale(1.05);
+            .social-link {
+                padding: 0.8rem 1.5rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 2rem;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
     <div class="grain"></div>
     
-    <div class="video-container">
+    <!-- Video Sequence -->
+    <div class="video-container" id="videoContainer">
         <!-- Scene 1: Opening Impact -->
         <div class="scene" id="scene1">
             <h1 class="headline">BUILT FOR MEN<br>WHO TAKE IT<br><span class="emphasis">DEEP</span></h1>
@@ -303,7 +560,7 @@
 
         <!-- Scene 3: Origin Story -->
         <div class="scene" id="scene3">
-            <p class="subtext story-text">San Francisco. <span class="founders">1978.</span><br>Two hardcore homos in leather.<br>One mission: Build toys that <span class="emphasis">never quit.</span></p>
+            <p class="subtext story-text">San Francisco. <span class="founders">1978.</span><br>Two hardcore homos in leather.<br>Build toys that <span class="emphasis">never quit.</span></p>
         </div>
 
         <!-- Scene 4: The Birth -->
@@ -320,17 +577,44 @@
         <div class="scene" id="scene6">
             <h1 class="headline">ANYTHING LESS<br>IS <span class="emphasis">SETTLING</span></h1>
         </div>
-
-        <!-- Scene 7: Logo & CTA -->
-        <div class="scene logo-scene" id="scene7">
-            <div class="logo">DONGCO</div>
-            <p class="tagline">Go Harder Than Your Ex</p>
-            <p class="year">Since 1978</p>
-            <a href="https://dongcodildo.com" class="website">DONGCODILDO.COM</a>
-        </div>
     </div>
 
-    <button class="replay-btn" id="replayBtn">↻ Replay</button>
+    <!-- Main Landing Page -->
+    <div class="main-page" id="mainPage">
+        <nav>
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">DONGCO</a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
+            </div>
+        </nav>
+
+        <div class="circles">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+
+        <div class="container">
+            <h1 class="logo">DONGCO</h1>
+            <p class="tagline"><span class="highlight">COMMING SOON</span></p>
+            <p class="subtitle">IN AN ASSHOLE NEAR YOU</p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://x.com/DONGCO_dildo" target="_blank" rel="noopener noreferrer" class="social-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
 
     <script>
         const scenes = [
@@ -339,8 +623,7 @@
             { id: 'scene3', duration: 4000 },
             { id: 'scene4', duration: 3500 },
             { id: 'scene5', duration: 3000 },
-            { id: 'scene6', duration: 3000 },
-            { id: 'scene7', duration: 6000 }
+            { id: 'scene6', duration: 3000 }
         ];
 
         let currentScene = 0;
@@ -361,9 +644,6 @@
             currentScene = 0;
             timeouts.forEach(timeout => clearTimeout(timeout));
             timeouts = [];
-
-            // Hide replay button
-            document.getElementById('replayBtn').classList.remove('show');
 
             function playNext() {
                 if (currentScene < scenes.length) {
@@ -387,9 +667,11 @@
                     
                     timeouts.push(timeout);
                 } else {
-                    // Show replay button when sequence ends
+                    // Transition to main page
                     setTimeout(() => {
-                        document.getElementById('replayBtn').classList.add('show');
+                        document.getElementById('videoContainer').classList.add('hidden');
+                        document.getElementById('mainPage').classList.add('show');
+                        document.body.style.overflow = 'auto';
                     }, 1000);
                 }
             }
@@ -402,8 +684,13 @@
             setTimeout(playSequence, 500);
         });
 
-        // Replay button
-        document.getElementById('replayBtn').addEventListener('click', playSequence);
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
     </script>
 </body>
 </html>
