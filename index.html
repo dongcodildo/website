@@ -751,6 +751,15 @@
         // Skip button
         document.getElementById('skipBtn').addEventListener('click', skipToMainPage);
 
+        // Nav logo click handler - replay video
+        document.querySelector('.nav-logo').addEventListener('click', (e) => {
+            e.preventDefault();
+            // Clear the video watched flag
+            sessionStorage.removeItem('videoWatched');
+            // Reload the page to replay video
+            window.location.reload();
+        });
+
         // Mobile menu toggle
         const mobileToggle = document.getElementById('mobileToggle');
         const navMenu = document.getElementById('navMenu');
