@@ -708,6 +708,8 @@
                         document.getElementById('videoContainer').classList.add('hidden');
                         document.getElementById('mainPage').classList.add('show');
                         document.body.style.overflow = 'auto';
+                        // Mark video as watched
+                        sessionStorage.setItem('videoWatched', 'true');
                     }, 1000);
                 }
             }
@@ -725,11 +727,25 @@
             document.getElementById('mainPage').classList.add('show');
             document.body.style.overflow = 'auto';
             document.getElementById('skipBtn').classList.add('hidden');
+            // Mark video as watched
+            sessionStorage.setItem('videoWatched', 'true');
         }
 
         // Start on load
         window.addEventListener('load', () => {
-            setTimeout(playSequence, 500);
+            // Check if video has already been watched in this session
+            const videoWatched = sessionStorage.getItem('videoWatched');
+            
+            if (videoWatched === 'true') {
+                // Skip video and go straight to main page
+                document.getElementById('videoContainer').classList.add('hidden');
+                document.getElementById('mainPage').classList.add('show');
+                document.body.style.overflow = 'auto';
+                document.getElementById('skipBtn').classList.add('hidden');
+            } else {
+                // Play video sequence
+                setTimeout(playSequence, 500);
+            }
         });
 
         // Skip button
