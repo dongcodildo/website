@@ -78,6 +78,93 @@
             margin-top: 4rem;
         }
 
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-section:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .contact-section h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .contact-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--accent), var(--light));
+            transition: width 0.3s ease;
+        }
+
+        .contact-item a:hover::after {
+            width: 100%;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        address {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: normal;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -200,7 +287,28 @@
 
     <div class="content">
         <h1>CONTACT</h1>
-        <p class="placeholder">COMING SOON - Contact form will be available here</p>
+        <div class="contact-info">
+            <div class="contact-section">
+                <h2>Leadership</h2>
+                <div class="contact-item">
+                    <h3>CEO</h3>
+                    <a href="mailto:rod.steel.trw@proton.me">rod.steel.trw@proton.me</a>
+                </div>
+                <div class="contact-item">
+                    <h3>Head of Homosexuality</h3>
+                    <a href="mailto:hardy.h.wood@proton.me">hardy.h.wood@proton.me</a>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2>Headquarters</h2>
+                <address>
+                    DONGCO Headquarters<br>
+                    420 Castro Street<br>
+                    San Francisco, CA 94114
+                </address>
+            </div>
+        </div>
     </div>
 
     <script>
