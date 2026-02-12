@@ -499,6 +499,40 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
+        /* Skip Button */
+        .skip-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 51, 51, 0.1);
+            border: 2px solid #ff3333;
+            color: #fff;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fadeIn 1s 2s forwards;
+        }
+
+        .skip-btn:hover {
+            background: #ff3333;
+            color: #000;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        .skip-btn.hidden {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .logo {
                 margin-bottom: 1.5rem;
@@ -547,6 +581,8 @@
     
     <!-- Video Sequence -->
     <div class="video-container" id="videoContainer">
+        <button class="skip-btn" id="skipBtn">✕</button>
+        
         <!-- Scene 1: Opening Impact -->
         <div class="scene" id="scene1">
             <h1 class="headline">BUILT FOR MEN<br>WHO TAKE IT<br><span class="emphasis">DEEP</span></h1>
@@ -560,7 +596,7 @@
 
         <!-- Scene 3: Origin Story -->
         <div class="scene" id="scene3">
-            <p class="subtext story-text">San Francisco. <span class="founders">1978.</span><br>Two hardcore homos in leather.<br>Build toys that <span class="emphasis">never quit.</span></p>
+            <p class="subtext story-text">San Francisco. <span class="founders">1978.</span><br>Two hardcore homos in leather.<br>One mission: Build toys that <span class="emphasis">never quit.</span></p>
         </div>
 
         <!-- Scene 4: The Birth -->
@@ -679,10 +715,25 @@
             playNext();
         }
 
+        function skipToMainPage() {
+            // Clear all timeouts
+            timeouts.forEach(timeout => clearTimeout(timeout));
+            timeouts = [];
+            
+            // Hide video container and show main page
+            document.getElementById('videoContainer').classList.add('hidden');
+            document.getElementById('mainPage').classList.add('show');
+            document.body.style.overflow = 'auto';
+            document.getElementById('skipBtn').classList.add('hidden');
+        }
+
         // Start on load
         window.addEventListener('load', () => {
             setTimeout(playSequence, 500);
         });
+
+        // Skip button
+        document.getElementById('skipBtn').addEventListener('click', skipToMainPage);
 
         // Mobile menu toggle
         const mobileToggle = document.getElementById('mobileToggle');
