@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - DONGCO</title>
+    <title>Blog - DONGCO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&display=swap" rel="stylesheet">
@@ -72,82 +72,83 @@
             letter-spacing: -0.02em;
         }
 
-        .about-content {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-            font-family: 'Archivo Black', sans-serif;
-            letter-spacing: 0.02em;
+        /* Blog Posts */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
-        .about-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .highlight {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .brand-name {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'Anton', sans-serif;
-            font-size: 1.3em;
-        }
-
-        .tagline {
-            text-align: center;
-            font-family: 'Anton', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            margin-top: 3rem;
-            color: var(--light);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        /* Founders Images */
-        .founders-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-            padding: 2rem 0;
-        }
-
-        .founder-image {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
+        .blog-post {
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
             transition: all 0.3s ease;
         }
 
-        .founder-image:hover {
+        .blog-post:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
             box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
         }
 
-        .founder-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s ease;
+        .blog-post-header {
+            margin-bottom: 1.5rem;
         }
 
-        .founder-image:hover img {
-            transform: scale(1.05);
+        .blog-post-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
         }
 
-        @media (max-width: 768px) {
-            .founders-images {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                margin-top: 2rem;
-            }
+        .blog-post-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            flex-wrap: wrap;
+        }
+
+        .blog-post-author {
+            color: var(--accent);
+        }
+
+        .blog-post-date {
+            color: var(--light);
+        }
+
+        .blog-post-content {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.02em;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            padding: 3rem 0;
+        }
+
+        .error {
+            text-align: center;
+            color: var(--accent);
+            font-size: 1.1rem;
+            padding: 2rem;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
         }
 
         /* Navigation */
@@ -256,6 +257,15 @@
             .content {
                 margin: 2rem auto;
             }
+
+            .blog-post {
+                padding: 1.5rem;
+            }
+
+            .blog-post-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -276,36 +286,92 @@
     </nav>
 
     <div class="content">
-        <h1>ABOUT</h1>
-        <div class="about-content">
-            <p>In the sweaty pulse of San Francisco's Castro in 1978, Rod—a burly ex-biker in full leather—and Hardy—an edgy sculptor in harness—met at a leather bar and clicked instantly. Both hardcore Pride fixtures, strutting in thongs and attitude, they griped about the same thing: every dildo out there was weak, boring, and couldn't handle real destruction.</p>
-
-            <p>One night, after a session that left them wanting more, Hardy sketched a beast—thick, veined, flared, built to last. Rod turned his garage into a workshop, melting silicone and hand-pouring prototypes. They tested relentlessly on each other until they nailed it: unapologetic power tools for men who play hard.</p>
-
-            <p>They called it <span class="brand-name">DONGCO</span>—DONG as the classic slang for a big, impressive cock, paired with "Company" to signal they were serious about building something epic for the community. Starting underground, they sold hand-to-hand at bathhouses and circuit parties. Word exploded through the scene—leather daddies and thong-wearing parade warriors raved about toys that never quit.</p>
-
-            <p>Made by hardcore homos for hardcore homos, <span class="brand-name">DONGCO</span> became essential gear: not a want, a need. Anything less felt like settling. Rod and Hardy sparked a quiet revolution—one brutal, blissful ride at a time.</p>
-
-            <p class="tagline">Level up. The toughest players already have.</p>
-            
-            <!-- Founders Images -->
-            <div class="founders-images">
-                <div class="founder-image">
-                    <img src="assets/rod_and_hardy_1.jpg" alt="Rod and Hardy - DONGCO Founders">
-                </div>
-                <div class="founder-image">
-                    <img src="assets/rod_and_hardy_2.jpg" alt="Rod and Hardy - DONGCO Founders">
-                </div>
-            </div>
+        <h1>BLOG</h1>
+        <div class="blog-posts" id="blogPosts">
+            <div class="loading">Loading posts...</div>
         </div>
     </div>
 
     <script>
+        // Mobile menu toggle
         const mobileToggle = document.getElementById('mobileToggle');
         const navMenu = document.getElementById('navMenu');
         mobileToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
+
+        // Load and display blog posts
+        async function loadBlogPosts() {
+            const blogPostsContainer = document.getElementById('blogPosts');
+            
+            try {
+                const response = await fetch('blog-posts.json');
+                if (!response.ok) throw new Error('Failed to load blog posts');
+                
+                const posts = await response.json();
+                
+                // Sort posts by date (newest first)
+                posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                // Clear loading message
+                blogPostsContainer.innerHTML = '';
+                
+                // Create HTML for each post
+                posts.forEach(post => {
+                    const postElement = document.createElement('article');
+                    postElement.className = 'blog-post';
+                    
+                    // Format date
+                    const date = new Date(post.date);
+                    const formattedDate = date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    });
+                    
+                    postElement.innerHTML = `
+                        <div class="blog-post-header">
+                            <h2 class="blog-post-title">${escapeHtml(post.title)}</h2>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By ${escapeHtml(post.author)}</span>
+                                <span class="blog-post-date">${formattedDate}</span>
+                            </div>
+                        </div>
+                        <div class="blog-post-content">
+                            ${formatContent(post.content)}
+                        </div>
+                    `;
+                    
+                    blogPostsContainer.appendChild(postElement);
+                });
+                
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                blogPostsContainer.innerHTML = '<div class="error">Failed to load blog posts. Please try again later.</div>';
+            }
+        }
+
+        // Format content - convert line breaks to paragraphs
+        function formatContent(content) {
+            const paragraphs = content.split('\n\n');
+            return paragraphs
+                .map(p => `<p>${escapeHtml(p.trim())}</p>`)
+                .join('');
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load posts when page loads
+        loadBlogPosts();
     </script>
+
+    <!-- Chat Widget -->
+    <link rel="stylesheet" href="chat-widget.css">
+    <script src="chat-widget.js"></script>
 </body>
 </html>
