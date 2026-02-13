@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&display=swap" rel="stylesheet">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -93,6 +95,13 @@
             box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
         }
 
+        .blog-post-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
         .blog-post-header {
             margin-bottom: 1.5rem;
         }
@@ -130,8 +139,92 @@
             letter-spacing: 0.02em;
         }
 
+        .blog-post-content h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .blog-post-content h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.4rem;
+            color: var(--light);
+            margin: 1.2rem 0 0.8rem;
+        }
+
         .blog-post-content p {
             margin-bottom: 1rem;
+        }
+
+        .blog-post-content strong {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .blog-post-content em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .blog-post-content ul, .blog-post-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post-content a {
+            color: var(--secondary);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .blog-post-content a:hover {
+            color: var(--primary);
+        }
+
+        .blog-post-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .blog-post-content hr {
+            border: none;
+            border-top: 2px solid rgba(255, 0, 110, 0.3);
+            margin: 2rem 0;
+        }
+
+        .blog-post-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .blog-post-content code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .blog-post-content pre {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .blog-post-content pre code {
+            background: none;
+            padding: 0;
         }
 
         .loading {
@@ -300,15 +393,72 @@
             navMenu.classList.toggle('active');
         });
 
+        // Configure marked for better rendering
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // List of blog post files (add new posts here)
+        const blogPostFiles = [
+            'blog/posts/2026-02-13-welcome.md'
+        ];
+
+        // Parse frontmatter from markdown
+        function parseFrontmatter(markdown) {
+            const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+            const match = markdown.match(frontmatterRegex);
+            
+            if (!match) {
+                return { metadata: {}, content: markdown };
+            }
+            
+            const frontmatterText = match[1];
+            const content = match[2];
+            
+            const metadata = {};
+            frontmatterText.split('\n').forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > -1) {
+                    const key = line.substring(0, colonIndex).trim();
+                    const value = line.substring(colonIndex + 1).trim();
+                    metadata[key] = value;
+                }
+            });
+            
+            return { metadata, content };
+        }
+
         // Load and display blog posts
         async function loadBlogPosts() {
             const blogPostsContainer = document.getElementById('blogPosts');
             
             try {
-                const response = await fetch('blog-posts.json');
-                if (!response.ok) throw new Error('Failed to load blog posts');
+                const posts = [];
                 
-                const posts = await response.json();
+                // Fetch all blog post files
+                for (const file of blogPostFiles) {
+                    try {
+                        const response = await fetch(file);
+                        if (!response.ok) continue;
+                        
+                        const markdown = await response.text();
+                        const { metadata, content } = parseFrontmatter(markdown);
+                        
+                        posts.push({
+                            ...metadata,
+                            content: content,
+                            filename: file
+                        });
+                    } catch (err) {
+                        console.error(`Error loading ${file}:`, err);
+                    }
+                }
+                
+                if (posts.length === 0) {
+                    blogPostsContainer.innerHTML = '<div class="error">No blog posts found.</div>';
+                    return;
+                }
                 
                 // Sort posts by date (newest first)
                 posts.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -329,7 +479,18 @@
                         day: 'numeric' 
                     });
                     
-                    postElement.innerHTML = `
+                    // Convert markdown to HTML
+                    const htmlContent = marked.parse(post.content);
+                    
+                    // Build post HTML
+                    let postHTML = '';
+                    
+                    // Add image if present
+                    if (post.image && post.image.trim()) {
+                        postHTML += `<img src="${post.image}" alt="${post.title}" class="blog-post-image">`;
+                    }
+                    
+                    postHTML += `
                         <div class="blog-post-header">
                             <h2 class="blog-post-title">${escapeHtml(post.title)}</h2>
                             <div class="blog-post-meta">
@@ -338,10 +499,11 @@
                             </div>
                         </div>
                         <div class="blog-post-content">
-                            ${formatContent(post.content)}
+                            ${htmlContent}
                         </div>
                     `;
                     
+                    postElement.innerHTML = postHTML;
                     blogPostsContainer.appendChild(postElement);
                 });
                 
@@ -349,14 +511,6 @@
                 console.error('Error loading blog posts:', error);
                 blogPostsContainer.innerHTML = '<div class="error">Failed to load blog posts. Please try again later.</div>';
             }
-        }
-
-        // Format content - convert line breaks to paragraphs
-        function formatContent(content) {
-            const paragraphs = content.split('\n\n');
-            return paragraphs
-                .map(p => `<p>${escapeHtml(p.trim())}</p>`)
-                .join('');
         }
 
         // Escape HTML to prevent XSS
