@@ -8,7 +8,7 @@ image:
 In a world where homosexuality was once shrouded in secrecy and stigma, one artist's unapologetic vision shattered barriers and redefined what it meant to be proudly gay.  
 **Tom of Finland** (born Touko Valio Laaksonen) wasn't just an illustrator—he was a revolutionary force who celebrated male desire, masculinity, and queer joy through his iconic homoerotic art.
 
-![Tom of Finland Tattooed Sailor and the Hoods drawing](https://upload.wikimedia.org/wikipedia/commons/3/3d/Tom_of_Finland_-_Tattooed_Sailor_and_the_Hoods_2.jpg)  
+![Tom of Finland Tattooed Sailor and the Hoods drawing](https://upload.wikimedia.org/wikipedia/commons/4/4b/Tom_of_Finland_-_Tattooed_Sailor_and_the_Hoods_2.jpg)  
 *Hypermasculine figures in leather – Tom of Finland's signature style (public domain via Wikimedia Commons)*
 
 ## The Man Behind the Myth
@@ -18,14 +18,14 @@ Yet from his early years, he drew inspiration from the rugged men around him—f
 
 Serving in World War II as a Finnish officer, Laaksonen encountered uniformed men that fueled his imagination, leading to drawings that exalted the hypermasculine form in leather, boots, and bulging confidence.
 
-![Portrait of Touko Laaksonen (Tom of Finland) in 1959](https://upload.wikimedia.org/wikipedia/commons/7/7e/Touko-Laaksonen-1959.jpg)  
+![Portrait of Touko Laaksonen (Tom of Finland) in 1959](https://upload.wikimedia.org/wikipedia/commons/5/54/Touko-Laaksonen-1959.jpg)  
 *The artist himself in 1959 (public domain in Finland via Wikimedia Commons)*
 
 What makes Tom of Finland truly praiseworthy is how he transformed homosexuality from a hidden vice into a **celebrated virtue**. In an era of repression, his art portrayed gay men not as victims or stereotypes, but as strong, joyful, and sexually liberated heroes.
 
 He challenged the effeminate caricatures prevalent in society, instead offering images of "bulgingly priapic cops and cowboys" that became symbols of gay liberation. Through series like his **"Kake" comics**, he created a visual language that resonated deeply within the gay community, fostering pride and acceptance.
 
-![Physique Pictorial cover featuring Tom of Finland artwork](https://upload.wikimedia.org/wikipedia/commons/7/7a/Physique_Pictorial_Vol_17_No_1_Tom_of_Finland.jpg)  
+![Physique Pictorial cover featuring Tom of Finland artwork](https://upload.wikimedia.org/wikipedia/commons/e/e8/Physique_Pictorial_Vol_17_No_1_Tom_of_Finland.jpg)  
 *Early published example from Physique Pictorial – classic Tom style (public domain in US via Wikimedia Commons)*
 
 ## Empowering the Queer Community
@@ -39,8 +39,8 @@ Artists and activists alike credit him with increasing the visibility of gay sub
 
 Even today, his legacy lives on through the **Tom of Finland Foundation**, which preserves his art and supports LGBTQ+ creators.
 
-![More examples from Tom of Finland category on Wikimedia](https://upload.wikimedia.org/wikipedia/commons/8/8e/Lots_of_Leather_%2853077845755%29.jpg)  
-*Leather-themed piece exemplifying his enduring influence (via Wikimedia Commons category)*
+![Leather-themed exhibition photo related to Tom of Finland](https://upload.wikimedia.org/wikipedia/commons/0/04/Lots_of_Leather_%2853077845755%29.jpg)  
+*Modern exhibition featuring Tom's leather artwork influence (via Wikimedia Commons category)*
 
 ## A Lasting Legacy of Pride
 
