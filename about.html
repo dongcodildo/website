@@ -108,6 +108,48 @@
             text-transform: uppercase;
         }
 
+        /* Founders Images */
+        .founders-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .founder-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .founder-image:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .founder-image:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .founders-images {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -244,6 +286,16 @@
             <p>Made by hardcore homos for hardcore homos, <span class="brand-name">DONGCO</span> became essential gear: not a want, a need. Anything less felt like settling. Rod and Hardy sparked a quiet revolution—one brutal, blissful ride at a time.</p>
 
             <p class="tagline">Level up. The toughest players already have.</p>
+            
+            <!-- Founders Images -->
+            <div class="founders-images">
+                <div class="founder-image">
+                    <img src="assets/rod_and_hardy_1.jpg" alt="Rod and Hardy - DONGCO Founders">
+                </div>
+                <div class="founder-image">
+                    <img src="assets/rod_and_hardy_2.jpg" alt="Rod and Hardy - DONGCO Founders">
+                </div>
+            </div>
         </div>
     </div>
 
