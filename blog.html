@@ -399,62 +399,95 @@
             gfm: true
         });
 
-        // List of blog post files (add new posts here)
-        const blogPostFiles = [
-            'blog/posts/2026-02-13-welcome.md',
-            'blog/posts/2026-02-13-tom-of-finland.md'
+        // Blog posts data (add new posts here)
+        const blogPosts = [
+            {
+                title: "Celebrating Tom of Finland - A Beacon of Gay Liberation and Artistic Boldness",
+                author: "Hardy Wood",
+                date: "2026-02-13",
+                image: "",
+                content: `In a world where homosexuality was once shrouded in secrecy and stigma, one artist's unapologetic vision shattered barriers and redefined what it meant to be proudly gay.  
+**Tom of Finland** (born Touko Valio Laaksonen) wasn't just an illustrator—he was a revolutionary force who celebrated male desire, masculinity, and queer joy through his iconic homoerotic art.
+
+![Tom of Finland Tattooed Sailor and the Hoods drawing](https://upload.wikimedia.org/wikipedia/commons/4/4b/Tom_of_Finland_-_Tattooed_Sailor_and_the_Hoods_2.jpg)  
+*Hypermasculine figures in leather – Tom of Finland's signature style (public domain via Wikimedia Commons)*
+
+## The Man Behind the Myth
+
+Touko Laaksonen was born in 1920 in Finland, a time and place where homosexuality was illegal and deeply taboo.  
+Yet from his early years, he drew inspiration from the rugged men around him—farmers, loggers, and soldiers—infusing his private sketches with a raw, erotic energy that would later explode onto the global stage.
+
+Serving in World War II as a Finnish officer, Laaksonen encountered uniformed men that fueled his imagination, leading to drawings that exalted the hypermasculine form in leather, boots, and bulging confidence.
+
+![Portrait of Touko Laaksonen (Tom of Finland) in 1959](https://upload.wikimedia.org/wikipedia/commons/5/54/Touko-Laaksonen-1959.jpg)  
+*The artist himself in 1959 (public domain in Finland via Wikimedia Commons)*
+
+What makes Tom of Finland truly praiseworthy is how he transformed homosexuality from a hidden vice into a **celebrated virtue**. In an era of repression, his art portrayed gay men not as victims or stereotypes, but as strong, joyful, and sexually liberated heroes.
+
+He challenged the effeminate caricatures prevalent in society, instead offering images of "bulgingly priapic cops and cowboys" that became symbols of gay liberation. Through series like his **"Kake" comics**, he created a visual language that resonated deeply within the gay community, fostering pride and acceptance.
+
+![Physique Pictorial cover featuring Tom of Finland artwork](https://upload.wikimedia.org/wikipedia/commons/e/e8/Physique_Pictorial_Vol_17_No_1_Tom_of_Finland.jpg)  
+*Early published example from Physique Pictorial – classic Tom style (public domain in US via Wikimedia Commons)*
+
+## Empowering the Queer Community
+
+Tom's contributions went far beyond aesthetics; he helped forge a new identity for gay men worldwide.  
+His hypermasculine characters influenced how homosexuals perceived themselves and were perceived by others, breaking taboos around gay sex and promoting a sense of brotherhood.
+
+In Finland, where laws against "deviant sexual behavior" lingered until the 1970s, his work addressed social stigmas head-on, paving the way for greater visibility and acceptance.
+
+Artists and activists alike credit him with increasing the visibility of gay subjectivity, especially in the latter 20th century. His drawings didn't just arouse—they united a community, inspiring leather subcultures and influencing figures like Robert Mapplethorpe.
+
+Even today, his legacy lives on through the **Tom of Finland Foundation**, which preserves his art and supports LGBTQ+ creators.
+
+![Leather-themed exhibition photo related to Tom of Finland](https://upload.wikimedia.org/wikipedia/commons/0/04/Lots_of_Leather_%2853077845755%29.jpg)  
+*Modern exhibition featuring Tom's leather artwork influence (via Wikimedia Commons category)*
+
+## A Lasting Legacy of Pride
+
+Tom of Finland's homosexuality wasn't a footnote in his story—it was the bold, beating heart of his genius.  
+By openly addressing and celebrating queer desire in a time of peril, he not only survived but thrived, leaving behind a world more accepting of love in all its forms.
+
+His art continues to empower, reminding us that true liberation comes from embracing who we are, **unapologetically**.
+
+For more on this iconic figure, explore the official site:  
+→ [Tom of Finland Foundation](https://www.tomoffinland.org/)  
+→ [Tom of Finland Gallery on Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Tom_of_Finland) (for additional public domain images)`
+            },
+            {
+                title: "Welcome to the DONGCO Blog",
+                author: "Rod & Hardy",
+                date: "2026-02-11",
+                image: "",
+                content: `Welcome to the DONGCO blog. Here we'll share stories from the community, product updates, and insights from our journey building toys for men who play hard.
+
+## What You'll Find Here
+
+- **Product deep-dives** and quality insights
+- Community stories from the scene
+- Tips for beginners and size queens alike
+- Behind-the-scenes at DONGCO
+
+## Our Mission
+
+Made by hardcore homos, for hardcore homos. That's always been the mission since Rod and Hardy started this in **1978** at a Castro leather bar.
+
+We don't do weak toys. We don't do boring. Every piece we make is built to last, tested on ourselves first, designed for men who play **hard**.
+
+Stay tuned for more content. We're just getting started.
+
+---
+
+*Level up. The toughest players already have.*`
+            }
         ];
 
-        // Parse frontmatter from markdown
-        function parseFrontmatter(markdown) {
-            const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
-            const match = markdown.match(frontmatterRegex);
-            
-            if (!match) {
-                return { metadata: {}, content: markdown };
-            }
-            
-            const frontmatterText = match[1];
-            const content = match[2];
-            
-            const metadata = {};
-            frontmatterText.split('\n').forEach(line => {
-                const colonIndex = line.indexOf(':');
-                if (colonIndex > -1) {
-                    const key = line.substring(0, colonIndex).trim();
-                    const value = line.substring(colonIndex + 1).trim();
-                    metadata[key] = value;
-                }
-            });
-            
-            return { metadata, content };
-        }
-
         // Load and display blog posts
-        async function loadBlogPosts() {
+        function loadBlogPosts() {
             const blogPostsContainer = document.getElementById('blogPosts');
             
             try {
-                const posts = [];
-                
-                // Fetch all blog post files
-                for (const file of blogPostFiles) {
-                    try {
-                        const response = await fetch(file);
-                        if (!response.ok) continue;
-                        
-                        const markdown = await response.text();
-                        const { metadata, content } = parseFrontmatter(markdown);
-                        
-                        posts.push({
-                            ...metadata,
-                            content: content,
-                            filename: file
-                        });
-                    } catch (err) {
-                        console.error(`Error loading ${file}:`, err);
-                    }
-                }
+                const posts = blogPosts;
                 
                 if (posts.length === 0) {
                     blogPostsContainer.innerHTML = '<div class="error">No blog posts found.</div>';
